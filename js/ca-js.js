@@ -12,7 +12,6 @@ fetch(url, {
 })
   .then((response) => response.json())
   .then((data) => {
-    console.log(data);
     var nonFeatured = data.filter((item) => item.featured == false);
     listGames(nonFeatured);
     var FeaturedGames = data.filter((item) => item.featured == true);

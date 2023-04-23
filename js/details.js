@@ -2,7 +2,6 @@ const main = document.querySelector('main')
 const queryString = document.location.search;
 const params = new URLSearchParams(queryString);
 const id = params.get("id");
-console.log(id)
 
 let username = "ck_d5d0c839717d9bd6f072b24e57bb96852d353e57";
 let password = "cs_cb7c839611d329268b2eb69a504b3a73a1047e0a";
@@ -15,9 +14,7 @@ fetch(url, {
 })
   .then((response) => response.json())
   .then((data) => {
-    console.log(data);
     listDetails(data);
-
   })
   .catch((error) => console.error(error));
 
