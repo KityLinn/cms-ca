@@ -1,0 +1,32 @@
+.game {
+    max-width: 200px;
+}
+.game img {
+    height: 100%;
+    width: 100%;
+}
+.featured-game {
+    max-width: 200px;
+}
+.featured-game img {
+    width: 100%;
+    height: 100%;
+}
+
+section {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.game-img-details {
+    max-width: 200px;
+}
+
+.game-img-details img {
+    width: 100%;
+    height: 100%;
+}
+.game-description {
+    max-width: 300px;
+}

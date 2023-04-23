@@ -1,34 +1,49 @@
-/*
-const url ="http://localhost/linn-power/wp-json/wc/store/products";
-let username ="ck_c96a2f181b9448f5638028550479b1c4f67de0e7"
-let password ="cs_2ffcdf4d55ac69796de15d75867fd6ad3337f92d"
+const gamesAttach = document.querySelector(".games");
+const featGamesAttach = document.querySelector(".featured-games");
 
-
+let username = "ck_d5d0c839717d9bd6f072b24e57bb96852d353e57";
+let password = "cs_cb7c839611d329268b2eb69a504b3a73a1047e0a";
+const url = "https://www.linn-ca.com/wp-json/wc/v3/products";
 fetch(url, {
-  method: 'GET',
+  method: "GET",
   headers: new Headers({
-    'Authorization': 'Basic ' + btoa(username + ":" + password)
-  })
+    Authorization: "Basic " + btoa(username + ":" + password),
+  }),
 })
-.then(response => response.json())
-.then(data => console.log(data))
-.catch(error => console.error(error));
-*/
-
-const main = document.querySelector('main');
-
-let username ="ck_d5d0c839717d9bd6f072b24e57bb96852d353e57";
-let password ="cs_cb7c839611d329268b2eb69a504b3a73a1047e0a";
-const url ="https://www.linn-ca.com/wp-json/wc/v3/products";
-fetch(url, {
-  method: 'GET',
-  headers: new Headers({
-    'Authorization': 'Basic ' + btoa(username + ":" + password)
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+    var nonFeatured = data.filter((item) => item.featured == false);
+    listGames(nonFeatured);
+    var FeaturedGames = data.filter((item) => item.featured == true);
+    listFeatured(FeaturedGames);
   })
-})
-.then(response => response.json())
-.then(data =>
-    {
-        console.log(data);
-    })
-.catch(error => console.error(error));
+  .catch((error) => console.error(error));
+
+const listGames = (games) => {
+  games.forEach((allGames) => {
+    const card = document.createElement("div");
+    card.classList.add("games-card");
+    card.innerHTML = `
+        <div class="game">
+          <a href="./details.html?id=${allGames.id}">
+            <img src="${allGames.images[0].src}"  alt="">
+          </a>
+        </div>`;
+    gamesAttach.appendChild(card);
+  });
+};
+
+const listFeatured = (featuredGames) => {
+  featuredGames.forEach((gamesFeatured) => {
+    const featCard = document.createElement("div");
+    featCard.classList.add("feat-games-card");
+    featCard.innerHTML = `
+        <div class="game">
+          <a href="./details.html?id=${gamesFeatured.id}">
+            <img src="${gamesFeatured.images[0].src}"  alt="">
+          </a>
+        </div>`;
+    featGamesAttach.appendChild(featCard);
+  });
+};
